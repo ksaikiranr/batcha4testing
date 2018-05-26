@@ -1,0 +1,40 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view home hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card wow fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3 wow fadeInUp " data-wow-delay="0.3s"><strong>Send a message/feedback</strong></h3>
+            <hr class="wow fadeInUp " data-wow-delay="0.3s" style="border-top: 1px solid #fff !important;"/>
+         </div>
+         <div class="card-body mx-4 wow fadeInUp" data-wow-delay="0.2s">
+            <form method="POST" action="/contact">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.senderName.errors %}{% for error in form.senderName.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-user prefix fa-fw "></i>{{form.senderName}}{{form.senderName.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.senderEmail.errors %}{% for error in form.senderEmail.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-envelope prefix fa-fw "></i>{{form.senderEmail}}{{form.senderEmail.label}}
+               </div>
+                <div class="md-form">
+                  {%if form.emailSubject.errors %}{% for error in form.emailSubject.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-envelope prefix fa-fw "></i>{{form.emailSubject}}{{form.emailSubject.label}}
+               </div><div class="md-form">
+                  {%if form.emailMessage.errors %}{% for error in form.emailMessage.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-envelope prefix fa-fw "></i>{{form.emailMessage}}{{form.emailMessage.label}}
+               </div>
+               <div class="text-center"> <button class="btn btn-default">Create account</button> </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

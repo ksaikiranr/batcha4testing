@@ -1,0 +1,42 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card animated fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3"><strong>Add new vehicle</strong></h3>
+         </div>
+         <div class="card-body mx-4 wow fadeInUp" data-wow-delay="0.2s">
+            <form method="POST" action="/addvehicle">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.aadhar.errors %}{% for error in form.aadhar.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}{{form.aadhar}}<br/>{{form.aadhar.label}}
+               </div>
+
+               <div class="md-form">
+                  {%if form.owner.errors %}{% for error in form.owner.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-gears fa-fw prefix "></i>{{form.owner}}{{form.owner.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.vname.errors %}{% for error in form.vname.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-bookmark-o prefix fa-fw"></i>{{form.vname}}{{form.vname.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.estimatedvalue.errors %}{% for error in form.estimatedvalue.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-bookmark-o prefix fa-fw"></i>{{form.estimatedvalue}}{{form.estimatedvalue.label}}
+               </div>
+
+               <div class="text-center wow fadeInUp" data-wow-delay="0.2s"> <button class="btn btn-default">Add vehicle to database</button> </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

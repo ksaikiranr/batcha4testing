@@ -1,0 +1,13 @@
+select s.aadhar, name, s.salary*12 - expense
+from salary as s,(select aadhar, sum(sumEstimateVal) as expense
+from 
+(select p.aadhar, sum(p.estimateVal) as sumEstimateVal
+from property as p
+group by p.aadhar
+union 
+select v.aadhar, sum(v.estimateVal)
+from vehicle as v
+group by v.aadhar) 
+group by aadhar
+) as e
+where s.aadhar = e.aadhar and (s.salary*12-expense)>=350000

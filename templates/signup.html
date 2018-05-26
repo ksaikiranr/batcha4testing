@@ -1,0 +1,49 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view home hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card wow fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3 wow fadeInUp" data-wow-delay="0.3s"><strong>Sign Up</strong></h3>
+            <hr style="border-top: 1px solid #fff !important;"/>
+         </div>
+         <div class="card-body mx-4 wow fadeInUp" data-wow-delay="0.2s">
+            <form method="POST" action="/signup">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.name.errors %}{% for error in form.name.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-user prefix fa-fw "></i>{{form.name}}{{form.name.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.email.errors %}{% for error in form.email.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-envelope prefix fa-fw "></i>{{form.email}}{{form.email.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.password.errors %}{% for error in form.password.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-lock prefix fa-fw"></i>{{form.password}}{{form.password.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.loginType.errors %}{% for error in form.loginType.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-user prefix fa-fw "></i>
+                  {{form.loginType}}
+                  {{form.loginType.label}}
+               </div> <br/><br/>
+               <div class="text-center"> <button class="btn btn-default">Create account</button> </div>
+            </form>
+         </div>
+         <div class="card-footer wow fadeInUp" data-wow-delay="0.2s">
+            <hr class="wow fadeInUp " data-wow-delay="0.3s" style="border-top: 1px solid #fff !important;"/>
+            <span style="float:left;">
+               <p class="font-small d-flex justify-content-end">Already a member? <a style="color: yellow !important;" href="{{url_for('login')}}" class="blue-text ml-1">Sign in</a></p>
+            </span>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Tax Tracker</title>
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+      <link href="{{url_for('static', filename='css/mdb.min.css')}}" rel="stylesheet">
+      <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+      <style rel="stylesheet"> </style>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar ">
+         <div class="container">
+            <a class="navbar-brand" href="{{url_for('index')}}"> <strong style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 15px; letter-spacing: 2.5px; text-transform: uppercase;">Tax Tracker </strong> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>{% if 'email' in session %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('home')}}">Home <i class="fa fa-home fa-fw" aria-hidden="true"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('contact')}}">Feedback <i class="fa fa-comments-o  fa-fw" aria-hidden="true"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('logout')}}">Log out <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i></a> </li>
+               </ul>
+            </div>
+            {% else %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('login')}}">Login <i class="fa fa-sign-in fa-fw" aria-hidden="true"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('signup')}}">Sign Up <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="{{url_for('contact')}}">Feedback <i class="fa fa-comments-o  fa-fw" aria-hidden="true"></i></a> </li>
+
+               </ul>
+            </div>
+            {% endif %}
+         </div>
+      </nav>
+      {% block content %}{% endblock %}
+
+      <footer class="page-footer center-on-small-only">
+
+         <div class="footer-copyright">
+            <div class="container-fluid" data-wow-delay="0.3s">
+               <p class=""><strong>HANDCRAFTED
+                 By Batch A4 </a>
+                 &#9679; RYMEC | India</strong>
+               </p>
+               <ul class="navbar-nav nav-flex-icons">
+                  <li class="nav-item"> <a class="nav-link"><i class="fa fa-facebook"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link"><i class="fa fa-twitter"></i></a> </li>
+                  <li class="nav-item"> <a class="nav-link"><i class="fa fa-instagram"></i></a> </li>
+               </ul>
+            </div>
+         </div>
+      </footer>
+      <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.1.1.min.js')}}"></script> <script type="text/javascript" src="{{url_for('static', filename='js/popper.min.js')}}"></script> <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script> <script type="text/javascript" src="{{url_for('static', filename='js/mdb.min.js')}}"></script> <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script> <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+   </body>
+</html>

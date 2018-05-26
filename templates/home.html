@@ -1,0 +1,277 @@
+{%extends "layout.html" %}
+
+{% block content %}
+
+<div class="home hm-black-light" >
+   <div class="full-bg-img">
+      <br/><br/><br/>
+      <!--<div id="notify" class="animated fadeInUp" style="background: rgba(3, 169, 244, 0.7); width:15rem; color: #fff; position: absolute; left: 10%; top: 20%; z-index: 999;">
+         <h2 class="h2-responsive px-5">Success <i class="fa fa-close pr-1" style="float:right; font-size: 20px !important; position: relative; left: 40px;"></i></h2>
+         <p class="px-3 text-center">Database is updated as per last operation.</p>
+      </div> -->
+      <div class="gradient-card-header blue-gradient text-center">
+         <br/>
+         <h3 class="white-text display-4 mb-4 animated fadeInUp">
+         Welcome {{session['name']}}</h3>
+      </div>
+
+
+      <!-- Nav tabs -->
+      <div class=" animated fadeInUp">
+         <ul class="nav nav-tabs nav-justified indigo" role="tablist" style="color:#fff !important;">
+            <li class="nav-item">
+               <a class="nav-link active" data-toggle="tab" href="#panelDefaulters" role="tab">Possible Defaulters</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panelSalary" role="tab"> Salary Table</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panelProperty" role="tab"> Property</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panelVehicle" role="tab"> Vehicle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panelAdmins" role="tab"> Managers</a>
+            </li>
+             {% if session['loginType'] == 'Manager' %}
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panelFeedback" role="tab"> Feedbacks</a>
+             </li>
+             {% endif %}
+         </ul>
+      </div>
+
+      <div class="card container mt-5 pt-4 pb-2 animated fadeInUp">
+
+
+         <!-- Tab panels -->
+         <div class="tab-content">
+          <!--Panel 1-->
+          <div class="tab-pane fade in show active" id="panelDefaulters" role="tabpanel">
+              <br>
+              <div class="animated fadeInUp">
+                  <div class="gradient-card-header">
+                     <h2 class="black-text text-center">Here are the possible defaulters.</h2><br/>
+                      <p class="black-text">Basic salary is multiplied by 12 and is deducted with expenses, and if the pay is still above 3.5LPA, then they make to this list</p>
+                  </div>
+                  <hr/>
+                  <br/><br/>
+                  <table id="defaulterTable" class="table table-hover table-bordered table-responsive-md dataTable" role="grid" aria-describedby="example_info" style="width: 100%;" width="100%" cellspacing="0">
+                     <thead class="blue-grey lighten-4 black-text text-center">
+                        <tr role="row">
+                           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;" aria-label="Name : activate to sort column descending" aria-sort="ascending"> <strong>Aadhar Id </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 91px;" aria-label="Position : activate to sort column ascending"> <strong>Name </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Income above 350000 </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                    </thead>
+                     <tbody>
+                        {% for item in defaultersList %}
+                        <tr role="row">
+                           <td class="sorting_1">
+                              <h5 class="black-text text-center" style=" font-weight: 500; ">{{item[0]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="">{{item[1]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[2]}}</h5>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  <hr/>
+             </div>
+          </div>
+          <!--/.Panel 1-->
+          <!--Panel 2-->
+          <!--/.Panel 2-->
+          <!--Panel 3-->
+          <div class="tab-pane fade" id="panelProperty" role="tabpanel">
+
+              <div class="animated fadeInUp">
+                  <div class="gradient-card-header">
+                     <h2 class="black-text text-center">Here are the properties held by users.</h2><br/>
+                      {% if session['loginType'] == 'Manager' %}
+                      <div class="text-center"> <a href="{{url_for('addproperty')}}" target="_blank" type="button" class="animated fadeInUp btn btn-default">Add new property to database</a>
+                      <a href="{{url_for('removeproperty')}}" target="_blank" type="button" class="animated fadeInUp btn btn-danger">Delete property from database</a> </div>
+                      {% endif %}
+                  </div>
+                  <table id="propertyTable" class="table table-hover table-bordered table-responsive-md dataTable" role="grid" aria-describedby="example_info" style="width: 100%;" width="100%" cellspacing="0">
+                     <thead class="blue-grey lighten-4 black-text text-center">
+                        <tr role="row">
+                           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;" aria-label="Name : activate to sort column descending" aria-sort="ascending"> <strong>Aadhar Id </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 91px;" aria-label="Position : activate to sort column ascending"> <strong>Owner </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Property held </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Estimated value </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                    </thead>
+                     <tbody>
+                        {% for item in propertyList %}
+                        <tr role="row">
+                           <td class="sorting_1">
+                              <h5 class="black-text text-center" style=" font-weight: 500; font-family: 'Open Sans', sans-serif; text-transform: uppercase;">{{item[0]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[1]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[2]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[3]}}</h5>
+                           </td>
+
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  <hr/>
+             </div>
+
+          </div>
+          <!--/.Panel 3-->
+          <!--Panel 2-->
+          <div class="tab-pane fade" id="panelVehicle" role="tabpanel">
+
+
+              <div class="animated fadeInUp">
+                  <div class="gradient-card-header">
+                     <h2 class="black-text text-center">Here are the vehicles held by users.</h2><br/>
+                      {% if session['loginType'] == 'Manager' %}
+                      <div class="text-center"> <a href="{{url_for('addvehicle')}}" target="_blank" type="button" class="animated fadeInUp btn btn-default">Add new vehicle to database</a>
+                                                    <a href="{{url_for('removevehicle')}}" target="_blank" type="button" class="animated fadeInUp btn btn-danger">Delete vehicle from database</a> </div>
+
+                      {% endif %}
+                  </div>
+                  <table id="vehicleTable" class="table table-hover table-bordered table-responsive-md dataTable" role="grid" aria-describedby="example_info" style="width: 100%;" width="100%" cellspacing="0">
+                     <thead class="blue-grey lighten-4 black-text text-center">
+                        <tr role="row">
+                           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;" aria-label="Name : activate to sort column descending" aria-sort="ascending"> <strong>Aadhar Id </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 91px;" aria-label="Position : activate to sort column ascending"> <strong>Owner </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Vechicle name </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Estimated value </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                    </thead>
+                     <tbody>
+                        {% for item in vehicleList %}
+                        <tr role="row">
+                           <td class="sorting_1">
+                              <h5 class="black-text text-center" style=" font-weight: 500; font-family: 'Open Sans', sans-serif; text-transform: uppercase;">{{item[0]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[1]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[2]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[3]}}</h5>
+                           </td>
+
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  <hr/>
+             </div>
+          </div>
+          <!--/.Panel 2-->
+          <!--Panel 3-->
+          <div class="tab-pane fade" id="panelSalary" role="tabpanel">
+              <br>
+               <div class="animated fadeInUp">
+                  <div class="gradient-card-header">
+                     <h2 class="black-text text-center">Here is the salary associated with each aadhar</h2>
+                      {% if session['loginType'] == 'Manager' %}
+                      <div class="text-center"> <a href="{{url_for('addperson')}}" target="_blank" type="button" class="animated fadeInUp btn btn-default">Add new user to database</a>
+                          <a href="{{url_for('removeperson')}}" target="_blank" type="button" class="animated fadeInUp btn btn-danger">Delete user from database</a> </div>
+                      {% endif %}
+                  </div>
+                  <hr/>
+                  <br/><br/>
+                  <table id="salaryTable" class="table table-hover table-bordered table-responsive-md dataTable" role="grid" aria-describedby="example_info" style="width: 100%;" width="100%" cellspacing="0">
+                     <thead class="blue-grey lighten-4 black-text text-center">
+                        <tr role="row">
+                           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;" aria-label="Name : activate to sort column descending" aria-sort="ascending"> <strong>Aadhar Id </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 91px;" aria-label="Position : activate to sort column ascending"> <strong>Name </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Salary </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                     </thead>
+                     <tbody>
+                        {% for item in salaryList %}
+                        <tr role="row">
+                           <td class="sorting_1">
+                              <h5 class="black-text text-center" style=" font-weight: 500; font-family: 'Open Sans', sans-serif; text-transform: uppercase;">{{item[0]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[1]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[2]}}</h5>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  <hr/>
+             </div>
+
+          </div>
+          <!--/.Panel 3-->
+
+
+
+          <!--Panel 2-->
+          <div class="tab-pane fade" id="panelAdmins" role="tabpanel">
+
+             <div class="animated fadeInUp">
+                  <div class="gradient-card-header">
+                     <h2 class="black-text text-center">Here are the adminstrators of the web application.</h2>
+                  </div>
+                  <hr/>
+                  <br/><br/>
+                  <table id="adminsTable" class="table table-hover table-bordered table-responsive-md dataTable" role="grid" aria-describedby="example_info" style="width: 100%;" width="100%" cellspacing="0">
+                     <thead class="blue-grey lighten-4 black-text text-center">
+                        <tr role="row">
+                           <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;" aria-label="Name : activate to sort column descending" aria-sort="ascending"> <strong>Id </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 91px;" aria-label="Position : activate to sort column ascending"> <strong>Emailid </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>
+                           <!--<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office : activate to sort column ascending"> <strong>Notes </strong><i class="fa fa-sort float-right" aria-hidden="true"></i> </th>-->
+                     </thead>
+                     <tbody>
+                        {% for item in adminList %}
+                        <tr role="row">
+                           <td class="sorting_1">
+                              <h5 class="black-text text-center" style=" font-weight: 500; font-family: 'Open Sans', sans-serif; text-transform: uppercase;">{{item[0]}}</h5>
+                           </td>
+                           <td class="sorting_1">
+                              <h5 class="" style="text-transform: uppercase;">{{item[1]}}</h5>
+                           </td>
+                        </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+                  <hr/>
+             </div>
+          </div>
+          <!--/.Panel 2-->
+            <div class="tab-pane fade" id="panelFeedback" role="tabpanel">
+                {% for item in feedbacksList %}
+                <div class="card" style="background: transparent;">
+                  <div class="card-body">
+                      <h4 class="card-title">Feedback id # <b>{{item[0]}}</b> <span style="font-size:0.65em; float:right">{{item[5]}}</span></h4>
+                      <h5>
+                          From: <b>{{item[2]}}</b><br/>
+                          Email: <b>{{item[1]}}</b><br/>
+                          Subject: <b>{{item[3]}}</b> <br/>
+                          Message: <br/>
+                      </h5>
+                      <p class="card-text">{{item[4]}}</p>
+                  </div>
+                </div><br/>
+                {% endfor %}
+            </div>
+         </div>
+
+      </div>
+       <br/><br/><br/>
+</div>
+
+{% endblock %}

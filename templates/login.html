@@ -1,0 +1,46 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view home hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card wow fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3 wow fadeInUp" data-wow-delay="0.3s"><strong>Sign in</strong></h3>
+            <hr style="border-top: 1px solid #fff !important;"/>
+         </div>
+         <div class="card-body mx-4 wow fadeInUp" data-wow-delay="0.2s">
+            <form method="POST" action="/login">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.loginType.errors %}{% for error in form.loginType.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-user prefix fa-fw "></i>
+                  {{form.loginType}}
+                  {{form.loginType.label}}
+               </div> <br/>
+               <div class="md-form">
+                  {%if form.email.errors %}{% for error in form.email.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-envelope prefix fa-fw "></i>{{form.email}}{{form.email.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.password.errors %}{% for error in form.password.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-lock prefix fa-fw "></i>{{form.password}}{{form.password.label}}
+               </div>
+               <div class="text-center"> <button class="btn btn-default">Login</button> </div>
+            </form>
+         </div>
+         <div class="card-footer wow fadeInUp" data-wow-delay="0.2s">
+            <hr style="border-top: 1px solid #fff !important;"/>
+            <span style="float:left;">
+               <p class="font-small d-flex justify-content-end">Not a member? <a href="{{url_for('signup')}}" class="blue-text ml-1" style="color: yellow !important;"> Sign Up</a></p>
+            </span>
+            <span style="float:right;">
+               <p class="font-small d-flex justify-content-end"><a style="color: yellow !important;" href="mailto:ksaikiranr@gmail.com" class="blue-text ml-1"> Forgot password?</a></p>
+            </span>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

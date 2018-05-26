@@ -1,0 +1,36 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card animated fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3"><strong>Add new user</strong></h3>
+         </div>
+         <div class="card-body mx-4 wow fadeInUp" data-wow-delay="0.2s">
+            <form method="POST" action="/addperson">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.aadhar.errors %}{% for error in form.aadhar.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}{{form.aadhar}}{{form.aadhar.label}}
+               </div>
+
+               <div class="md-form">
+                  {%if form.name.errors %}{% for error in form.name.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-gears fa-fw prefix "></i>{{form.name}}{{form.name.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.salary.errors %}{% for error in form.salary.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-bookmark-o prefix fa-fw"></i>{{form.salary}}{{form.salary.label}}
+               </div>
+               <div class="text-center wow fadeInUp" data-wow-delay="0.2s"> <button class="btn btn-default">Add User to database</button> </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

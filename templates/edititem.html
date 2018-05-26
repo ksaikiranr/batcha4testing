@@ -1,0 +1,35 @@
+{%extends "layout.html" %}
+
+{% block content %}
+<div class="view hm-black-light">
+   <div class="full-bg-img flex-center">
+      <div class="card animated fadeInUp " data-wow-delay="0.3s" style="animation-name: none; visibility: visible; background: rgba(126, 123, 215, 0.2); width: 28rem;margin-top: 5px !important;">
+         <div class="text-center mx-4">
+            <h3 class=" mt-4 mb-3"><strong>Edit item</strong></h3>
+         </div>
+         <div class="card-body mx-4">
+            <form method="POST" action="/edititem">
+               {{form.hidden_tag()}}
+               <div class="md-form">
+                  {%if form.itemname.errors %}{% for error in form.itemname.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-gears prefix fa-fw"></i>{{form.itemname}}{{form.itemname.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.quantity.errors %}{% for error in form.quantity.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-shopping-basket prefix fa-fw "></i>{{form.quantity}}{{form.quantity.label}}
+               </div>
+               <div class="md-form">
+                  {%if form.notes.errors %}{% for error in form.notes.errors %}
+                  <p class="error-messages">{{error}}</p>
+                  {% endfor %}{% endif %}<i class="fa fa-bookmark-o prefix fa-fw"></i>{{form.notes}}{{form.notes.label}}
+               </div>
+               <div class="text-center"> <button name="edit" class="btn btn-default">Edit Item</button> </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}
