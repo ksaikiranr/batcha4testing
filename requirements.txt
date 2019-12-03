@@ -3,7 +3,7 @@ chardet==3.0.4
 Cython==0.25
 dnspython==1.15.0
 docutils==0.14
-ecdsa==0.13
+ecdsa==0.13.3
 gunicorn==19.7.1
 idna==2.6
 pbkdf2==1.3
