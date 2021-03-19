@@ -15,7 +15,7 @@ six==1.11.0
 slowaes==0.1a1
 tlslite==0.4.9
 urllib3==1.22
-Jinja2==2.10
+Jinja2==2.11.3
 Flask==0.12.2
 Flask-WTF==0.14.2
 WTForms==2.1
